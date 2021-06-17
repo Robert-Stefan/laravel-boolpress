@@ -3,8 +3,9 @@
 @section('content')
     <div class="container">
         <h1>OUR POSTS</h1>
+        <a class="btn btn-primary" href="{{ route('adminposts.create') }}">Create a new post</a>
 
-        <table class="table">
+        <table class="table mt-5">
             <thead>
                 <tr>
                     <th>ID</th>

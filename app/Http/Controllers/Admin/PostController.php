@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Post;
 
 class PostController extends Controller
@@ -39,7 +40,18 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // VALIDAZIONE
-        
+
+        $data = $request->all();
+
+        // gen slug 
+        $data['slug'] = Str::slug($data['title'], '-');
+
+        // create and save record on db 
+        $new_post = new Post();
+        $new_post->fill($data);  // <--!!! FILLABLE
+        $new_post->save();
+
+        return redirect()->route('adminposts.show', $new_post->id);
     }
 
     /**

@@ -41,7 +41,7 @@ class PostController extends Controller
     {
         // VALIDAZIONE
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|unique:posts|max:5',
             'content' => 'required'
         ]);
 

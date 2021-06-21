@@ -41,6 +41,16 @@
                         @enderror
                     </div>
 
+                    <div class="mb-3">
+                        <label for="category_id">Category</label>
+                        <select class="form-control" name="category_id" id="category_id">
+                            <option value="">-- Select Category --</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <button class="btn btn-primary" type="submit">Create post</button>
 
                 </form>

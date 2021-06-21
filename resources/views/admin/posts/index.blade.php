@@ -45,5 +45,18 @@
                 @endforeach
             </tbody>
         </table>
+        {{-- GET POSTS BY CATEGORY --}}
+        <h2>Post By Category</h2>
+        @foreach ($categories as $category)
+            <h3 class="mt-4">{{ $category->name }}</h3>
+            {{-- @dump($category->posts); --}}
+            @forelse ($category->posts as $post)
+                <h4>
+                    <a href="{{ route('adminposts.show', $post->id) }}">{{ $post->title }}</a>
+                </h4>
+            @empty 
+                No posts for this category. <a href="{{ route('adminposts.create') }}">Create a new post</a>
+            @endforelse
+        @endforeach
     </div>
 @endsection

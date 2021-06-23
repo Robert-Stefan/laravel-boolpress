@@ -13,7 +13,15 @@
             <a class="btn btn-warning" href="{{ route('adminposts.edit', $post->id) }}">Edit post</a>
         </div>
 
-        <div>{{ $post->content }}</div>
+        <div class="mb-5">{{ $post->content }}</div>
+
+        {{-- POST TAGS --}}
+        @if(count($post->tags) > 0)
+            <h4>Tags</h4>
+            @foreach ($post->tags as $tag)
+                <span class="badge badge-primary">{{ $tag->name }}</span>                
+            @endforeach
+        @endif
     </div>
     
 @endsection

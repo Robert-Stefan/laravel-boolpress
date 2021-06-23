@@ -69,6 +69,12 @@ class PostController extends Controller
         $new_post->fill($data);  // <--!!! FILLABLE
         $new_post->save();
 
+        // SALVA RELAZIONE CON TAGS IN TABELLA PIVOT
+        if(array_key_exists('tags', $data)) {
+            //post_tags
+            $new_post->tags()->attach($data['tags']); // aggiunge nuove records nella tabella pivot
+        }
+
         return redirect()->route('adminposts.show', $new_post->id);
     }
 
@@ -99,12 +105,13 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $categories = Category::all();
+        $tags = Tag::all();
 
         if(! $post) {
             abort(404);
         }
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -125,7 +132,8 @@ class PostController extends Controller
                 'max: 255'
             ],
             'content' => 'required',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags_id' => 'nullable|exists:tags,id'
         ], [ //Personalizziamo i messaggi
             'required' => 'The :attribute is required!!',
             'unique' => 'The :attribute is already in use for an another post.',
@@ -142,6 +150,14 @@ class PostController extends Controller
         }
 
         $post->update($data); // <-- FILLABLE 
+
+        // AGGIORNA RELAZIONE TABELLA PIVOT 
+        if(array_key_exists('tags', $data)) {
+            // aggiunta records tabella pivot 
+            $post->tags()->sync($data['tags']);
+        } else {
+            $post->tags()->detach();
+        }
 
         return redirect()->route('adminposts.show', $post->id);
     }

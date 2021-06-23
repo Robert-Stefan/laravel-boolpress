@@ -68,7 +68,7 @@
                                 </label>
                             </span>
                         @endforeach
-                        @error('tags_id')
+                        @error('tags')
                             <div>{{ $message }}</div>
                         @enderror
                     </div>

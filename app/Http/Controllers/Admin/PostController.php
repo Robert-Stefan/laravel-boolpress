@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use App\Post;
 use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -31,9 +32,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::all(); 
+        $categories = Category::all();
+        $tags = Tag::all(); 
 
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -48,7 +50,8 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|unique:posts|max:255',
             'content' => 'required',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags_id' => 'nullable|exists:tags,id'
         ], [ //Personalizziamo i messaggi
             'required' => 'The :attribute is required!!',
             'unique' => 'The :attribute is already in use for an another post.',

@@ -51,7 +51,7 @@ class PostController extends Controller
             'title' => 'required|unique:posts|max:255',
             'content' => 'required',
             'category_id' => 'nullable|exists:categories,id',
-            'tags_id' => 'nullable|exists:tags,id'
+            'tags' => 'nullable|exists:tags,id',
         ], [ //Personalizziamo i messaggi
             'required' => 'The :attribute is required!!',
             'unique' => 'The :attribute is already in use for an another post.',

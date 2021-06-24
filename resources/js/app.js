@@ -7,7 +7,7 @@
 //FRONT OFFICE
 
 window.Vue = require("vue");
-window.axios = require("axios");
+// window.axios = require("axios");  globale
 
 // INIT VUE MAIN INSTANCE
 import App from "./App.vue";

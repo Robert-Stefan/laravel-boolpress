@@ -1925,6 +1925,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
  //import parziale non globale
 
 
@@ -1933,8 +1937,43 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Header: _components_Header_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  data: function data() {
+    return {
+      posts: []
+    };
+  },
   created: function created() {
-    console.log(axios__WEBPACK_IMPORTED_MODULE_0___default.a);
+    // console.log(axios);
+    this.getPosts();
+  },
+  methods: {
+    getPosts: function getPosts() {
+      var _this = this;
+
+      // Get posts from API
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/posts").then(function (res) {
+        console.log(res.data);
+        _this.posts = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    formatDate: function formatDate(date) {
+      var postDate = new Date(date);
+      var day = postDate.getDate();
+      var month = postDate.getMonth() + 1;
+      var year = postDate.getFullYear();
+
+      if (day < 10) {
+        day = "0" + day;
+      }
+
+      if (month < 10) {
+        month = "0" + month;
+      }
+
+      return "".concat(day, "/").concat(month, "/").concat(year);
+    }
   }
 });
 
@@ -3145,21 +3184,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("Header"), _vm._v(" "), _vm._m(0)], 1)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("main", [
-      _c("div", { staticClass: "container" }, [
-        _c("h1", [_vm._v("Blog")]),
-        _vm._v("\n\n            Posts list\n        ")
+  return _c(
+    "div",
+    [
+      _c("Header"),
+      _vm._v(" "),
+      _c("main", [
+        _c(
+          "div",
+          { staticClass: "container" },
+          [
+            _c("h1", [_vm._v("Blog")]),
+            _vm._v(" "),
+            _vm._l(_vm.posts, function(post) {
+              return _c("article", { key: post.id }, [
+                _c("h2", [_vm._v(_vm._s(post.title))]),
+                _vm._v(" "),
+                _c("div", [_vm._v(_vm._s(_vm.formatDate(post.created_at)))]),
+                _vm._v(" "),
+                _c("a", { attrs: { href: "" } }, [_vm._v("Red more")])
+              ])
+            })
+          ],
+          2
+        )
       ])
-    ])
-  }
-]
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

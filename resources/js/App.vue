@@ -3,9 +3,11 @@
         <Header />
 
         <main>
-            <h1>Welcome to public home</h1>
+            <div class="container">
+                <h1>Blog</h1>
 
-            <p>Work in progress</p>
+                Posts list
+            </div>
         </main>
     </div>
 </template>
@@ -17,11 +19,15 @@ export default {
     name: "App",
     components: {
         Header
+    },
+    created() {
+        console.log(axios);
     }
 };
 </script>
 
 <style lang="scss">
+@import "../sass/frontoffice/utilities";
 body {
     font-family: sans-serif;
 }

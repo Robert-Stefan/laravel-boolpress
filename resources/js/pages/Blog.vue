@@ -9,7 +9,13 @@
                 <article v-for="post in posts" :key="post.id">
                     <h2>{{ post.title }}</h2>
                     <div>{{ formatDate(post.created_at) }}</div>
-                    <a href="">Red more</a>
+                    <router-link
+                        :to="{
+                            name: 'post-detail',
+                            params: { slug: post.slug }
+                        }"
+                        >Read More</router-link
+                    >
                 </article>
 
                 <section class="navigation">

@@ -1,19 +1,33 @@
 <template>
     <div class="container">
         <div v-if="post">
-            <h1>Titolo qui</h1>
+            <h1>{{ post.title }}</h1>
+
+            <div class="post-info">
+                <span>{{ post.category.name }}</span>
+
+                <Tags :tags="post.tags" />
+            </div>
+
+            <div>
+                {{ post.content }}
+            </div>
         </div>
-        <div v-else>
-            Loading.....
-        </div>
+        <Loader v-else />
     </div>
 </template>
 
 <script>
 import axios from "axios";
+import Loader from "../components/Loader.vue";
+import Tags from "../components/Tags.vue";
 
 export default {
     name: "PostDetail",
+    components: {
+        Loader,
+        Tags
+    },
     data() {
         return {
             post: null
@@ -42,4 +56,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>

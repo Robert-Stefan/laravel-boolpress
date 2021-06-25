@@ -28,4 +28,8 @@ export default {
 header {
     background: lightblue;
 }
+
+.active {
+    color: green;
+}
 </style>

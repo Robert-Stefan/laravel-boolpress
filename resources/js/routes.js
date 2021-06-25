@@ -6,6 +6,7 @@ import VueRouter from "vue-router";
 import Home from "./pages/Home.vue";
 import About from "./pages/About.vue";
 import Blog from "./pages/Blog.vue";
+import NotFound from "./pages/NotFound.vue";
 
 // Registrazione route con vue
 Vue.use(VueRouter);
@@ -13,6 +14,7 @@ Vue.use(VueRouter);
 // Definizione rotte app
 const router = new VueRouter({
     mode: "history",
+    linkExactActiveClass: "active",
     routes: [
         {
             path: "/",
@@ -28,6 +30,10 @@ const router = new VueRouter({
             path: "/blog",
             name: "blog",
             component: Blog
+        },
+        {
+            path: "*",
+            component: NotFound
         }
     ]
 });

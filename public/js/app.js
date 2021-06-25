@@ -1955,6 +1955,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Header"
 });
@@ -3244,26 +3251,45 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("header", [
-      _c("a", { attrs: { href: "" } }, [_vm._v("BoolPress")]),
-      _vm._v(" "),
-      _c("nav", [
-        _c("ul", [
-          _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Blog")])]),
-          _vm._v(" "),
-          _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("About")])])
-        ])
+  return _c("header", [
+    _c("a", { attrs: { href: "" } }, [_vm._v("BoolPress")]),
+    _vm._v(" "),
+    _c("nav", [
+      _c("ul", [
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "home" } } }, [
+              _vm._v("Home")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "blog" } } }, [
+              _vm._v("Blog")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "about" } } }, [
+              _vm._v("About")
+            ])
+          ],
+          1
+        )
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

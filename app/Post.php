@@ -11,7 +11,8 @@ class Post extends Model
         'title',
         'slug',
         'category_id',
-        'content'
+        'content',
+        'cover'
     ];
 
     // RELAZIONE CON CATEGORIES 

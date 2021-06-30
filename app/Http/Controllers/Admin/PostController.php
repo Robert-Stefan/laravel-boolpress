@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 use App\Post;
 use App\Category;
 use App\Tag;
@@ -52,6 +53,7 @@ class PostController extends Controller
             'content' => 'required',
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|exists:tags,id',
+            'cover' => 'nullable|mimes:jpg,png,jpeg,gif,svg',
         ], [ //Personalizziamo i messaggi
             'required' => 'The :attribute is required!!',
             'unique' => 'The :attribute is already in use for an another post.',
@@ -60,6 +62,14 @@ class PostController extends Controller
 
 
         $data = $request->all();
+
+        // AGGIUNGI COVER IMAGE SE PRESENTE NEL FORM
+        if(array_key_exists('cover', $data)) {
+            $img_path = Storage::put('posts-cover', $data['cover']);
+
+            // override cover file with path 
+            $data['cover'] = $img_path;
+        }
 
         // gen slug 
         $data['slug'] = Str::slug($data['title'], '-');
@@ -144,6 +154,17 @@ class PostController extends Controller
 
         $post = Post::find($id);
 
+        // Image Update
+        if(array_key_exists('cover', $data)) {
+            // delete previous one
+            if($post->cover) {
+                Storage::delete($post->cover);
+            }
+
+            // set new one
+            $data['cover'] = Storage::put('posts-cover', $data['cover']);
+        }
+
         // gen slug  
         if($data['title'] != $post->title) {
             $data['slug'] = Str::slug($data['title'], '-');
@@ -171,6 +192,11 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+
+        // rimozione eventuale immagine associata
+        if($post->cover) {
+            Storage::delete($post->cover);
+        }
 
         //pulizia orfani da tabella pivot 
         $post->tags()->detach();

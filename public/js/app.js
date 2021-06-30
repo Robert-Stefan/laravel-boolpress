@@ -2229,6 +2229,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -3891,12 +3895,20 @@ var render = function() {
               "div",
               { staticClass: "post-info" },
               [
-                _c("span", [_vm._v(_vm._s(_vm.post.category.name))]),
+                _vm.post.category
+                  ? _c("span", [_vm._v(_vm._s(_vm.post.category.name))])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("Tags", { attrs: { tags: _vm.post.tags } })
               ],
               1
             ),
+            _vm._v(" "),
+            _vm.post.cover
+              ? _c("img", {
+                  attrs: { src: _vm.post.cover, alt: _vm.post.title }
+                })
+              : _vm._e(),
             _vm._v(" "),
             _c("div", [
               _vm._v("\n            " + _vm._s(_vm.post.content) + "\n        ")

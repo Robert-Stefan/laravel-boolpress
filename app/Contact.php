@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends Model
 {
     // MASS ASS. 
-    protected $fillabile = [
+    protected $fillable = [
         'name',
         'email', 
         'message',

@@ -2159,6 +2159,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2186,11 +2188,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Contact",
+  data: function data() {
+    return {
+      name: "",
+      email: "",
+      message: "",
+      errors: {},
+      success: false,
+      sending: false
+    };
+  },
   methods: {
     postForm: function postForm() {
-      console.log("Post form data here");
+      var _this = this;
+
+      // console.log("Post form data here");
+      this.sending = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://127.0.0.1:8000/api/contacts", {
+        name: this.name,
+        email: this.email,
+        message: this.message
+      }).then(function (res) {
+        console.log(res.data);
+        _this.sending = false;
+
+        if (res.data.errors) {
+          _this.errors = res.data.errors;
+          _this.success = false;
+        } else {
+          _this.name = "";
+          _this.email = "";
+          _this.message = "";
+          _this.errors = {};
+          _this.success = true;
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   }
 });
@@ -2386,7 +2455,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".form-group[data-v-01b3a6b2] {\n  margin-bottom: 1rem;\n}\nlabel[data-v-01b3a6b2] {\n  display: block;\n}", ""]);
+exports.push([module.i, ".form-group[data-v-01b3a6b2] {\n  margin-bottom: 1rem;\n}\nlabel[data-v-01b3a6b2] {\n  display: block;\n}\n.error-message[data-v-01b3a6b2] {\n  color: red;\n}\n.success-message[data-v-01b3a6b2] {\n  margin-bottom: 2rem;\n  color: green;\n  font-size: 1.25rem;\n}\nbutton[data-v-01b3a6b2]:disabled {\n  cursor: not-allowed;\n}", ""]);
 
 // exports
 
@@ -3924,6 +3993,22 @@ var render = function() {
     _c("p", [_vm._v("lorem ipsum dolor sit amet")]),
     _vm._v(" "),
     _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.success,
+            expression: "success"
+          }
+        ],
+        staticClass: "success-message"
+      },
+      [_vm._v("\n        Message sent successfully.\n    ")]
+    ),
+    _vm._v(" "),
+    _c(
       "form",
       {
         on: {
@@ -3934,49 +4019,144 @@ var render = function() {
         }
       },
       [
-        _vm._m(0),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", { attrs: { for: "name" } }, [_vm._v("Name*")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              attrs: { type: "text", id: "name" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.errors.name, function(error, index) {
+              return _c(
+                "div",
+                { key: "err-name-" + index, staticClass: "error-message" },
+                [
+                  _vm._v(
+                    "\n                " + _vm._s(error) + "\n            "
+                  )
+                ]
+              )
+            })
+          ],
+          2
+        ),
         _vm._v(" "),
-        _vm._m(1),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", { attrs: { for: "email" } }, [_vm._v("Email*")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email,
+                  expression: "email"
+                }
+              ],
+              attrs: { type: "email", id: "email" },
+              domProps: { value: _vm.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.errors.email, function(error, index) {
+              return _c(
+                "div",
+                { key: "err-email-" + index, staticClass: "error-message" },
+                [
+                  _vm._v(
+                    "\n                " + _vm._s(error) + "\n            "
+                  )
+                ]
+              )
+            })
+          ],
+          2
+        ),
         _vm._v(" "),
-        _vm._m(2),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", { attrs: { for: "message" } }, [_vm._v("Message*")]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.message,
+                  expression: "message"
+                }
+              ],
+              attrs: { id: "message", cols: "30", rows: "10" },
+              domProps: { value: _vm.message },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.message = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.errors.message, function(error, index) {
+              return _c(
+                "div",
+                { key: "err-message-" + index, staticClass: "error-message" },
+                [
+                  _vm._v(
+                    "\n                " + _vm._s(error) + "\n            "
+                  )
+                ]
+              )
+            })
+          ],
+          2
+        ),
         _vm._v(" "),
-        _c("button", { attrs: { type: "submit" } }, [_vm._v("Send")])
+        _c("button", { attrs: { type: "submit", disabled: _vm.sending } }, [
+          _vm._v(
+            "\n            " +
+              _vm._s(_vm.sending ? "Sending..." : "Send") +
+              "\n        "
+          )
+        ])
       ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "name" } }, [_vm._v("Name*")]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", id: "name" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "email" } }, [_vm._v("Email*")]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "email", id: "email" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "message" } }, [_vm._v("Message*")]),
-      _vm._v(" "),
-      _c("textarea", { attrs: { id: "message", cols: "30", rows: "10" } })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

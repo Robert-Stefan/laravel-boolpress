@@ -8,6 +8,11 @@
             non labore voluptatem soluta doloribus! Deleniti reiciendis illum ea
             unde repellendus amet.
         </p>
+        <div>
+            <v-btn block>
+                Block Button
+            </v-btn>
+        </div>
     </div>
 </template>
 

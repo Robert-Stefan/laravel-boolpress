@@ -7,14 +7,22 @@
 //FRONT OFFICE
 
 window.Vue = require("vue");
+import Vue from "vue";
 // window.axios = require("axios");  globale
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
 
 // INIT VUE MAIN INSTANCE
 import App from "./App.vue";
 import router from "./routes";
 
+// register vuetify
+Vue.use(Vuetify);
+const vuetify = new Vuetify();
+
 const root = new Vue({
     el: "#root",
-    router: router,
+    router,
+    vuetify,
     render: h => h(App)
 });
